@@ -46,9 +46,9 @@ spec:
 axway central create -f ./secret.yaml
 ```
 
-## Referencing the secret in agent configuration.
+## Referencing the secret in agent configuration
 
-Agents configuration support referencing data keys in secret resource for their values in all string based configuration properties. When referencing secret the configuration property value must begin with "@Secret." followed by dot separated name of secret resource and the data key name. 
+Agents configuration support referencing data keys in secret resource for their values in all string based configuration properties. When referencing secret the configuration property value must begin with "@Secret." followed by dot separated name of secret resource and the data key name.
 
 Below is an example of referencing secret data key in agent env configuration.
 

@@ -3,7 +3,7 @@ title: Using secure credentials in configuration
 linkTitle: Using secure credentials in configuration
 draft: false
 weight: 20
-description: Understand how to secure credentials in agent configuration by referencing data keys within secret resource in Central. 
+description: Understand how to secure credentials in the agent configuration by referencing data keys within the secret resource in Central. 
 ---
 ## Before You Start
 
@@ -12,13 +12,13 @@ description: Understand how to secure credentials in agent configuration by refe
 
 ## Objectives
 
-Learn how to secure credentials in agent configuration by referencing data keys within secret resource created in Central.
+Learn how to secure credentials in the agent configuration by referencing data keys within secret resource created in Central.
 
-While the agent configuration allows setting up credential based configuration as environment variables with clear text, referencing the secret resource in such configuration provides a better security.
+While the agent configuration allows setting up credential-based configuration as environment variables with clear text, it doesn't provide the necessary security.
 
 ## Creating secret resource in Central
 
-* Create a yaml file with resource definition for secret in environment scope. Below is a sample of the yaml file with resource definition for secret
+* Create a yaml file with a resource definition for secret in environment scope:
 
 ```yml
 group: management
@@ -40,17 +40,15 @@ spec:
     accessKeyValue: ww0********=
 ```
 
-* Create the secret resource using AXWAY Central CLI.
+* Create the secret resource using AXWAY Central CLI:
 
 ```shell
 axway central create -f ./secret.yaml
 ```
 
-## Referencing the secret in agent configuration
+## Referencing the secret in the agent configuration
 
-Agents configuration support referencing data keys in secret resource for their values in all string based configuration properties. When referencing secret the configuration property value must begin with "@Secret." followed by dot separated name of secret resource and the data key name.
-
-Below is an example of referencing secret data key in agent env configuration.
+The agents' configurations support referencing data keys in secret resource for their values in all string-based configuration properties. When referencing secret, the configuration property value must begin with `@Secret.`, followed by a dot-separated name of the secret resource and the data key name:
 
 ```shell
 ...
@@ -59,4 +57,4 @@ AZURE_SHAREDACCESSKEYVALUE=@Secret.example-azure-secret.accessKeyValue
 ...
 ```
 
-By specifying the prefix "@Secret." the agent configuration parser knows that it needs to resolve the value of the configuration property using the specified secret resource and data key. While resolving the value if the configuration parser successfully resolves the referenced secret, value of the secret data key is set as the configuration property value, otherwise the agent logs the error in resolving the secret and the configuration property value is set as empty string.
+By specifying the prefix `@Secret.`, the agent configuration parser must resolve the value of the configuration property using the specified secret resource and data key. While resolving the value, if the configuration parser successfully resolves the referenced secret, then the value of the secret data key is set as the configuration property value. Otherwise, the agent logs the error in resolving the secret and the configuration property value is set as empty string.
